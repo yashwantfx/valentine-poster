@@ -17,7 +17,7 @@
       background: black;
     }
 
-    /* Background image */
+    /* Background */
     .bg {
       position: fixed;
       width: 100%;
@@ -27,17 +27,12 @@
       z-index: -1;
     }
 
-    /* Main poster */
+    /* Poster */
     .poster {
       max-width: 95%;
       max-height: 95%;
       opacity: 0;
       animation: fadeIn 2s ease forwards, float 6s ease-in-out infinite;
-
-      /* 🔥 FORCE REMOVE ANY GLOW */
-      box-shadow: none !important;
-      filter: none !important;
-
       border-radius: 12px;
     }
 
@@ -75,24 +70,29 @@
   </style>
 </head>
 
-<body onclick="playMusic()">
+<body>
 
   <img class="bg" src="map.png" />
   <img class="poster" src="poster.png" />
 
-  <div class="tap-text">tap anywhere ❤️</div>
+  <div class="tap-text" id="tap">tap anywhere ❤️</div>
 
+  <!-- MUSIC -->
   <audio id="music" loop>
-    <source src="song.mp3" type="audio/mpeg">
+    <source src="Sugar.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-    function playMusic() {
-      const music = document.getElementById("music");
+    const music = document.getElementById("music");
+    const tapText = document.getElementById("tap");
+
+    function startExperience() {
       music.play();
-      document.querySelector(".tap-text").style.display = "none";
-      document.body.onclick = null;
+      tapText.style.display = "none";
+      document.body.removeEventListener("click", startExperience);
     }
+
+    document.body.addEventListener("click", startExperience);
   </script>
 
 </body>
